@@ -1,33 +1,31 @@
+from functions import *
 from tkinter import *
-import random
-
-count = 0
-koloda = [2,3,4,5,6,7,8, 9, 10, "валет", "дама","король", "туз"] * 4
-random.shuffle(koloda)
-def take():
-    global count
-    
+from tkinter import messagebox
 
 root = Tk()
-root.title("Gui на Python")
-root.geometry("300x250")
+root.title("GUI на Python")
+root.geometry("450x400")
 
-text1 = Label(root, text = "Игра в BlackJack", bg = "#8bb1ef",
-                    fg = "#5e3404", justify = CENTER)
-text1.place(x = 100, y = 0)
+messageName = StringVar()
+messageDate = StringVar()
 
-text2 = Label(root, text = "Карта", bg = "#8afcc1",
-                    fg = "#0a0a0a")
-text2.place(x = 120, y = 50)
+message_info = Label(text = "Название")
+message_info.place(relx = ".3", rely = ".1", anchor = "c", y = "15")
+message_info = Label(text = "Дата")
+message_info.place(relx = ".7", rely = ".1", anchor = "c", y = "15")
 
-btn1 = Button(text= "Взять", command = take)
-btn1.place(x = 40, y = 100)
+message_name = Entry(textvariable = messageName, bg="#eff0f2")
+message_name.place(relx = ".3", rely = ".2", anchor = "c")
+message_date = Entry(textvariable = messageDate, bg="#eff0f2")
+message_date.place(relx = ".7", rely = ".2", anchor = "c")
 
-btn2 = Button(text= "Хватит", command = take)
-btn2.place(x = 200, y = 100)
-
-text3 = Label(root, text = "Количество Очков", bg = "#050505",
-                    fg = "#007bff")
-text3.place(x = 90, y = 150)
+message_button = Button(text = "Добавить", command = insertValue)
+message_button.place(relx = ".2", rely = ".3", anchor = "c")
+message_button = Button(text = "Найти")
+message_button.place(relx = ".4", rely = ".3", anchor = "c")
+message_button = Button(text = "Изменить")
+message_button.place(relx = ".6", rely = ".3", anchor = "c")
+message_button = Button(text = "Удалить")
+message_button.place(relx = ".8", rely = ".3", anchor = "c")
 
 root.mainloop()
