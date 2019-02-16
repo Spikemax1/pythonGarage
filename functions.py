@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*- 
 
 import csv
 import os
@@ -9,9 +8,11 @@ FILENAME = "docs/products.csv"
 
 def createFile():
     if not os.path.isfile(FILENAME):
+        Newname = "Название"
+        Newdate = "Дата"
         with open(FILENAME, "w", newline = "", encoding = "utf8") as file:
             writeNames = csv.writer(file)
-            writeNames.writerow(["Название", "Дата"]) 
+            writeNames.writerow([Newname, Newdate]) 
 
 try:
     if os.path.isfile(FILENAME):
@@ -28,16 +29,15 @@ except:
       
 
 
-def insertValue():
-    intData = messageName.get()
-    intTime = messageTime.get()
-    '''with open(FILENAME, "a", encoding = "utf8") as file:
+def insertValue(intData, intTime = datetime.date.today()):
+    intData = intData.lower().strip()
+    with open(FILENAME, "a", encoding = "utf8") as file:
             writeNames = csv.writer(file)
-            writeNames.writerow([intData, intTime])'''
+            writeNames.writerow([intData, intTime])
     
 def searchInt(name):
-    name = name.lower()
-    with open(FILENAME, "r", newline = "") as file:
+    name = name.lower().strip()
+    with open(FILENAME, "r") as file:
         freader = csv.reader(file)
         for row in freader:
             if row[0] == name:
@@ -57,8 +57,6 @@ def deleteInt(name):
                 writer.writerow(model)
     os.remove("docs/products.csv")
     os.rename("docs/products2.csv", "docs/products.csv")
-
-
 
 
 
