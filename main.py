@@ -11,6 +11,8 @@ root.geometry("450x400")
 
 messageName = StringVar()
 messageDate = StringVar()
+resultText = StringVar()
+
 
 
 def intValue():
@@ -26,9 +28,14 @@ def searchVal():
     dateStr = elem[1].split("-")
     oldDate = datetime.date(int(dateStr[0]), int(dateStr[1]), int(dateStr[2]))
     '''
+    if elem == False:
+        resultText.set("Пусто")
+        return False
     oldDate = datetime.datetime.strptime(elem[1], "%Y-%m-%d")
     result = (newDate - oldDate).days
-    print(datetime.timedelta(days= result))
+    val = datetime.timedelta(days= result)
+    print(val)    
+    resultText.set(val)
 
 def changeVal():
     changeInt(messageName.get(), messageDate.get())
@@ -65,6 +72,11 @@ message_button = Button(text = "Удалить", bg = "#000000", fg= "#DCFAFF",
                          activebackground="#5D1820", command = deleteVal,
                          activeforeground ="#4B75FF")
 message_button.place(relx = ".8", rely = ".3", anchor = "c")
+
+message_result = Label(textvariable = resultText, bg = "#818284", fg= "#e2fcbf",
+                         activebackground="#5D1820",
+                         activeforeground ="#4B75FF")
+message_result.place(relx = ".5", rely = ".5", anchor = "c")
 
 root.mainloop()
 
