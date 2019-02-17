@@ -1,6 +1,7 @@
 from functions import *
 from tkinter import *
 from tkinter import messagebox
+import datetime
 
 root = Tk()
 root.title("GUI на Python")
@@ -17,6 +18,23 @@ def intValue():
         insertValue(messageName.get())
     else:
         insertValue(messageName.get(), messageDate.get())
+
+def searchVal():
+    elem = searchInt(messageName.get())
+    newDate = datetime.datetime.now()
+    '''
+    dateStr = elem[1].split("-")
+    oldDate = datetime.date(int(dateStr[0]), int(dateStr[1]), int(dateStr[2]))
+    '''
+    oldDate = datetime.datetime.strptime(elem[1], "%Y-%m-%d")
+    result = (newDate - oldDate).days
+    print(datetime.timedelta(days= result))
+
+def changeVal():
+    changeInt(messageName.get(), messageDate.get())
+
+def deleteVal():
+    deleteInt(messageName.get())
 
 message_info = Label(text = "Название")
 message_info.place(relx = ".3", rely = ".1", anchor = "c", y = "15")
@@ -36,15 +54,15 @@ message_button = Button(text = "Добавить", bg = "#000000", fg= "#DCFAFF"
                          activeforeground ="#4B75FF")
 message_button.place(relx = ".2", rely = ".3", anchor = "c")
 message_button = Button(text = "Найти",bg = "#000000", fg= "#DCFAFF",
-                         activebackground="#5D1820",
+                         activebackground="#5D1820", command = searchVal,
                          activeforeground ="#4B75FF")
 message_button.place(relx = ".4", rely = ".3", anchor = "c")
 message_button = Button(text = "Изменить",bg = "#000000", fg= "#DCFAFF",
-                         activebackground="#5D1820", 
+                         activebackground="#5D1820", command = changeVal,
                          activeforeground ="#4B75FF")
 message_button.place(relx = ".6", rely = ".3", anchor = "c")
 message_button = Button(text = "Удалить", bg = "#000000", fg= "#DCFAFF",
-                         activebackground="#5D1820", 
+                         activebackground="#5D1820", command = deleteVal,
                          activeforeground ="#4B75FF")
 message_button.place(relx = ".8", rely = ".3", anchor = "c")
 
