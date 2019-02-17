@@ -31,13 +31,18 @@ except:
 
 def insertValue(intData, intTime = datetime.date.today()):    
     intData = intData.lower().strip()
-    searchFile = searchInt(intData)
-    if searchFile == False:
-        with open(FILENAME, "a", encoding = "utf8") as file:
-            writeNames = csv.writer(file)
-            writeNames.writerow([intData, intTime])
+    searchFile = True
+    if intData != "":
+        searchFile = searchInt(intData)
+        if searchFile == False:
+            with open(FILENAME, "a", encoding = "utf8") as file:
+                writeNames = csv.writer(file)
+                writeNames.writerow([intData, intTime])
+        else:
+                print("Указанное имя существует")
     else:
-        print("Указанное имя существует")
+        print("Пустое значение")
+    
     
 def searchInt(name):
     name = name.lower().strip()
@@ -69,8 +74,10 @@ def deleteInt(name):
 def changeInt(intData, intTime):
     intData = intData.lower().strip()
     elem = searchInt(intData)
-    if elem != False and intTime != "":
+    if elem != False:
         deleteInt(intData)
+        if intTime == "":
+            intTime = datetime.date.today()
         insertValue(intData, intTime)
     else:
         print("Такого имени нет")
