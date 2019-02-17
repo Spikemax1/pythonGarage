@@ -20,6 +20,8 @@ def intValue():
         insertValue(messageName.get())
     else:
         insertValue(messageName.get(), messageDate.get())
+    messageName.set("")
+    messageDate.set("")
 
 def searchVal():
     elem = searchInt(messageName.get())
@@ -33,9 +35,11 @@ def searchVal():
         return False
     oldDate = datetime.datetime.strptime(elem[1], "%Y-%m-%d")
     result = (newDate - oldDate).days
-    val = datetime.timedelta(days= result)
-    print(val)    
-    resultText.set(val)
+    years = int(round((result / 365), 0))
+    days = result % 365 
+    result = "{} лет {} дней".format(years, days)
+    print(result)    
+    resultText.set(result)
 
 def changeVal():
     changeInt(messageName.get(), messageDate.get())
